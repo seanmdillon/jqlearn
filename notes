@@ -1,0 +1,23 @@
+Searching DOM
+
+$("#destinations li");
+$("#destinations > li");
+$("#destinations > li:first");
+$("#destinations > li:even");
+$(".class1, .class2");
+
+
+Traversting the DOM
+$("li").first();
+$("li").first().next();  -- this is called method chaining
+$("li").first().next().prev();
+
+you can also walk UP the DOM
+$("li").first();
+$("li").first().parent();  -- this selects the unordered list parent of LI
+
+walking DOWN
+$("#destinations").children("li");
+
+
+
