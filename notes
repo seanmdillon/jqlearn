@@ -6,8 +6,11 @@ $("#destinations > li:first");
 $("#destinations > li:even");
 $(".class1, .class2");
 
-
 Traversting the DOM
+Find method:
+$('li.item-ii').find('li').css('background-color', 'red');
+
+
 $("li").first();
 $("li").first().next();  -- this is called method chaining
 $("li").first().next().prev();
@@ -18,6 +21,56 @@ $("li").first().parent();  -- this selects the unordered list parent of LI
 
 walking DOWN
 $("#destinations").children("li");
+
+
+
+$(document).ready(function() {
+  var price = $('<p>From $399.99</p>');
+  $('.vacation').append(price); -- NO
+  $('.vacation').prepend(price); -- NO
+  $('.vacation').before(price); -- NO
+  $('.vacation').after(price);
+
+  $('button').remove();
+
+});
+
+
+DOM for our page:
+
+DOCUMENT
+
+li	class="vacation"
+   h2
+      Hawaiian Vacation
+
+   button
+      Get Price
+
+
+
+$('button')
+
+We're going to use the jQuery Object Method .on()
+	- .on(<event>, <event handler function>);
+
+$('button').on('click', function() {
+  // runs when any button is clicked
+});
+
+
+$('button') targetrs all buttons.
+.on('click' runs when the button is clicked
+function() is the code in the handler
+
+$(document).ready(function() {
+  $('button').on('click', function() {
+    var price = $('<p>From $399.99</p>');
+    $('.vacation').append(price);
+    $('button').remove();
+  });
+});
+
 
 
 
