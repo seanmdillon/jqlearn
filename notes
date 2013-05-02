@@ -157,8 +157,117 @@ $(document).ready(function(){
 
 
 
+TRAVERSING AND FILTERING
+Refactoring 'Get Price'
+
+
+// application.js
+$(document).ready(function() {
+	$('button').on('click', function() {
+		var price = $('<p>From $399.99</p>'); // we don't like this line;
+		$(this).closest('.vacation').append(price);
+		$(this).remove();
+	});
+});
+
+// INSTEAD, we like
+var amount = $(this).closest('.vacation').data('price');
+				* 'price' *Reads from the data-price attribute*
+var price = $('<p>From $' + amount + '</p>');
+
+.data(<name>) retrieves the value of attribute <name>
+.data(<name>, <value>) sets the value <value> of attribute <name>
+
+$('vacation').first().data('price');
+(as an example)
+
+
+REFACTORING 'GET PRICE'
+$(document).ready(function(){
+  $('button').on('click', function(){
+    var price = $('<p>From $399.99</p>'); // instead of this
+    $(this).closest('.vacation').append(price);
+    $(this).remove();
+  });
+});
+
+// we'll do this
+    // grab the price attribute of the closes vacation class inside a button click
+    //  this results in each vacation having its own price based on the .closest('.vacation')
+    var amount = $(this).closest('.vacation').data('price');
+
+    // now use this value to construct the new message
+    var price = $('<p>From $' + amount + '</p>');
+
+
+// NEXT, we can see that in the application.js, we're duplicating the jquery fetch for (this).closest('.vacation')
+// refactored, it looks like this:
+
+	var vacation = $(this).closes('.vacation');
+	var amount = vacation.data('price');
+	vacation.append(price);
+	$(this).remove();
+
+// only querying the DOM once makes the code faster.  IMPORTANT!
+
+// but hey, what if we start adding more buttons to the page?
+// we *could* use a class selector such as
+$('.vacation button').on('click', function() {});
+
+// but there's a better way...
+we can select out the class, and then specify what kind of click events we want to listen for:
+$('.vacation').on('click', 'button', function() {});
+
+// this is called ***EVENT DELEGATION***!  We're only targeting buttons that are INSIDE the vacation class
+//		.on('click', 'button', function() {})
+//		** only catch button clicks on the button class inside the parent selector (.vacation)
 
 
 
 
+
+
+
+
+FILTERS
+<div id='filters'>
+	...
+	<button class='onsale-filter'>On Sale Now</button>
+	<button class='expiring-filter'>Expiring Soon</button>
+	...
+</div>
+
+
+$('filters').on('click', '.onsale-filter', function(){
+	// find all vacations that are on-sale
+	// add a class to these variables
+});
+
+
+
+<div id="tours">
+  <h1>Guided Tours</h1>
+  <ul>
+    <li class="usa tour" data-discount="299">
+      <h2>New York, New York</h2>
+      <span class="details">$1,899 for 7 nights</span>
+      <button class="book">Book Now</button>
+    </li>
+    <li class="europe tour" data-discount="176">
+      <h2>Paris, France</h2>
+      <span class="details">$2,299 for 7 nights</span>
+      <button class="book">Book Now</button>
+    </li>
+    <li class="asia tour" data-discount="349">
+      <h2>Tokyo, Japan</h2>
+      <span class="details">$3,799 for 7 nights</span>
+      <button class="book">Book Now</button>
+    </li>
+  </ul>
+</div>
+
+
+
+
+`
 

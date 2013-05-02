@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JQuery Test Page</title>
+</head>
+<body>
+  <div class="homepage-wrapper">
+    <h2>Welcome to jQuery Travels - Traversing the DOM since 2006</h2>
+    <p>Fly to New York today for as little as <span>$299.99</span></p>
+  </div>
+	<div id="vacations-wrapper">
+		<h1>Vacation Packages</h1>
+		<ul id="vacations">
+			<li class="vacation america">
+				<h2>San Francisco, California</h2>
+				<span class="details">$700</span>
+			</li>
+		</ul>
+		<ul id="vacations">
+			<li class="vacation america">
+				<h2>Washington DC, District of Colombia</h2>
+				<span class="details">$400</span>
+			</li>
+		</ul>
+		<ul id="vacations">
+			<li class="vacation europe">
+				<h2>London, England</h2>
+				<span class="details">$1,100</span>
+			</li>
+		</ul>
+		<ul id="vacations">
+			<li class="vacation asia">
+				<h2>Shanghai, China</h2>
+				<span class="details">$1,200</span>
+			</li>
+		</ul>
+		<ul class="sorting">
+			<li><a href="#">America</a></li>
+			<li><a href="#">Europe</a></li>
+			<li><a href="#">Asia</a></li>
+		</ul>
+	</div>
+
+        <div id="tours">
+          <h1>Guided Tours</h1>
+          <ul>
+            <li class="usa tour" data-discount="299">
+              <h2>New York, New York</h2>
+              <span class="details">$1,899 for 7 nights</span>
+              <button class="book">Book Now</button>
+            </li>
+            <li class="europe tour" data-discount="176">
+              <h2>Paris, France</h2>
+              <span class="details">$2,299 for 7 nights</span>
+              <button class="book">Book Now</button>
+            </li>
+            <li class="asia tour" data-discount="349">
+              <h2>Tokyo, Japan</h2>
+              <span class="details">$3,799 for 7 nights</span>
+              <button class="book">Book Now</button>
+            </li>
+          </ul>
+        </div>
+
+  <script src="js/jquery-1.9.1.min.js"></script>
+  <script src="js/application2.js"></script>
+</body>
+</html>
