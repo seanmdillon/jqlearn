@@ -210,6 +210,10 @@ $(document).ready(function(){
 
 // only querying the DOM once makes the code faster.  IMPORTANT!
 
+
+
+ON WITH A SELECTOR
+
 // but hey, what if we start adding more buttons to the page?
 // we *could* use a class selector such as
 $('.vacation button').on('click', function() {});
@@ -223,8 +227,22 @@ $('.vacation').on('click', 'button', function() {});
 //		** only catch button clicks on the button class inside the parent selector (.vacation)
 
 
+**EXPLAINED AGAIN**
+// application.js
+//  this listens for click events inside button elements
+//  if we add new buttons anywhere, they will trigger this click handler, though!
+$(document).ready(function() {
+  $('button').on('click', function() {
+  ...
+  });
+});
 
+// we *could* do this, but there's a better way to do it
+$('.vacation button').on('click', function() {});
 
+// instead, fetch nodes of .vacation class, and add an event handler to button elements
+//  hiphiphooray
+$('.vacation').on('click', 'button', function() {});
 
 
 
@@ -238,9 +256,38 @@ FILTERS
 </div>
 
 
-$('filters').on('click', '.onsale-filter', function(){
-	// find all vacations that are on-sale
-	// add a class to these variables
+// we'll traverse the DOM and look for the filters ID (denoted by the # sign, below),
+//  and use event delegation to add a click handler to the onsale-filter class:
+$('#filters').on('click', '.onsale-filter', function(){
+  // find all vacations that are on-sale
+  // add a class to these variables
+});
+
+so how do we select the elements that are onsale?
+we *could* just use a selector to traverse the DOM:
+  $('.vacation.onsale')
+
+but instead, we'll use filtering...
+  // this selects the nodes in the DOM that are of class vacation, and filters them
+  //  to only select the elements that have the onsale class
+  $('.vacation, filter('.onsale')
+
+// code becomes
+$('#filters').on('click', '.onsale-filter', function(){
+  // find all vacations that are on-sale
+  $('.vacation, filter('.onsale')
+
+  // add a class to these variables
+});
+
+Now we need to add a class to the elements found... so we can do that in jQuery using the add a class method
+.addClass(<class>)
+.removeClass(<class>)
+
+So with that.. our code becomes
+$('#filters').on('click', '.onsale-filter', function(){
+  // find all vacations that are on-sale
+  $('.vacation, filter('.onsale').addClass('highlighted'));
 });
 
 
