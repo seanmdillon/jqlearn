@@ -482,7 +482,31 @@ This returns a string, but we need to make it a number.....  ADD A PLUS TO THE B
 var price = +$(this).closest('.vacation').data('price');
   = 399.99
 
+Getting the quantity of tickets
 
+$(document).ready(function() {
+  $('.vacation').on('keyup', '.quantity', function() {
+    var price = +$(this).closest('.vacation').data('price');
+    // get the quantity entered
+    // set the total to price + quantity
+  });
+});
+
+
+JQuery Object Methods
+.val(<new value>)
+.val()
+
+var quantity = this.val(); XXX
+var quantity = $(this).val();
+
+$(document).ready(function() {
+  $('.vacation').on('keyup', '.quantity', function() {
+    var price = +$(this).closest('.vacation').data('price');
+    var quantity = $(this).val();
+    $('#total').text(price * quantity);
+  });
+});
 
 
 
