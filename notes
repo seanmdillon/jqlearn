@@ -509,19 +509,202 @@ $(document).ready(function() {
 });
 
 
+<div id="tour" class="tour" data-daily-price="357">
+  <h2>Paris, France Tour</h2>
+  <p>$<span id="total">2,499</span> for <span id="nights-count">7</span> Nights</p>
+  <p>
+    <label for="nights">Number of Nights</label>
+  </p>
+  <p>
+    <input type="number" id="nights" value="7">
+  </p>
+</div>
+
+// set the span #nights-count text to be the data entered into .nights input field
+$(document).ready(function() {
+  $('.nights').on('keyup', function() {
+		var nightscount = $(this).val();
+    $('#nights-count').text(nightscount);
+  });
+});
+
+// set the content of the #total element to the price times the number of days specified by the user
+$(document).ready(function() {
+  $('#nights').on('keyup', function() {
+    var nights = $(this).val();
+    var price = +$(this).closest('.tour').data('daily-price');
+    alert('nights ' + nights);
+    alert('price ' + price);
+    
+    $('#nights-count').text(nights);
+    $('#total').text(nights*price);
+  });
+});
+
+
+$(document).ready(function() {
+  $('#nights').on('keyup', function() {
+    var nights = +$(this).val();
+    var dailyPrice = +$(this).closest('.tour').data('daily-price');
+    $('#total').text(nights * dailyPrice);
+    $('#nights-count').text($(this).val());
+  });
+  $('#nights').on('focus', function() {
+    $(this).val('7');
+  });
+});
+
+
+If we want text on the page to fade in when we click on something, as an example, we use link layover
+
+DOCUMENT:
+ul
+  li .vacation
+    a .expand
+      show comments
+    ul .comments  // will show the comments
+      li
+      li
+
+in DOM, we need to make sure comments ul is hidden when we load the page
+
+.comments {
+	display: none;
+}
+
+in app.js
+$(document).ready(function(){
+  $('.vacation').on('click', '.expand', function() {
+
+    // find the comments ul
+    // show the comments ul (fade it in)
+    
+  });
+});
+
+
+to find appropriate comments list...
+$(this).closest('.vacation').find('.comments')
+
+//closest searches UP, find searches DOWN
+
+now .fadeIn(), .fadeOut(), .fadeToggle()
+
+$(document).ready(function(){
+  $('.vacation').on('click', '.expand', function() {
+    $(this).closest('.vacation')
+           .find('.comments')
+           .fadeToggle();
+  });
+});
+
+// this mechanism makes the page jump to the top of the page... we need to fix it
+essentially what's going on is... we get a click event that occurs in the DOM.  because we're using an 
+href, the event propagates up to the top of the page.  the a href='#' pops the page to the top as it's 
+not referencing anything INSIDE the page so it jumps to the top
+
+To do this, we need to use stopPropagation()
+
+$(document).ready(function(){
+  $('.vacation').on('click', '.expand', function(event) { 
+    event.stopPropagation();
+    $(this).closest('.vacation')
+           .find('.comments')
+           .fadeToggle();
+  );
+});
+
+// this is actually NOT the one we want.  instead, we'll use event.preventDefault()
+
+$(document).ready(function(){
+  $('.vacation').on('click', '.expand', function(event) { 
+    event.preventDefault();
+    $(this).closest('.vacation')
+           .find('.comments')
+           .fadeToggle();
+  );
+});
 
 
 
+// given the following HTML, write an event handler that will target all links with a class
+of .see-photos on click
+
+<div id="all-tours" class="links">
+  <h1>Guided Tours</h1>
+  <ul>
+    <li class="tour usa" data-discount="199">
+      <h2>New York, New York</h2>
+      <span class="details">$1,899 for 7 nights</span>
+      <button class="book">Book Now</button>
+      <a href="#" class="see-photos">See Photos</a>
+      <ul class="photos">
+        <li>
+          <img src="/assets/photos/paris1.jpg">
+          <span>Arc de Triomphe</span>
+        </li>
+        <li>
+          <img src="/assets/photos/paris2.jpg">
+          <span>The Eiffel Tower</span>
+        </li>
+        <li>
+          <img src="/assets/photos/paris3.jpg">
+          <span>Notre Dame de Paris</span>
+        </li>
+      </ul>
+    </li>
+    <li class="tour france" data-discount="99">
+      <h2>Paris, France</h2>
+      <span class="details">$1,499 for 5 nights</span>
+      <button class="book">Book Now</button>
+      <a href="#" class="see-photos">See Photos</a>
+      <ul class="photos">
+        <li>
+          <img src="/assets/photos/paris1.jpg">
+          <span>Arc de Triomphe</span>
+        </li>
+        <li>
+          <img src="/assets/photos/paris2.jpg">
+          <span>The Eiffel Tower</span>
+        </li>
+        <li>
+          <img src="/assets/photos/paris3.jpg">
+          <span>Notre Dame de Paris</span>
+        </li>
+      </ul>
+    </li>
+    <li class="tour uk" data-discount="149">
+      <h2>London, UK</h2>
+      <span class="details">$2,199 for 5 nights</span>
+      <button class="book">Book Now</button>
+      <a href="#" class="see-photos">See Photos</a>
+      <ul class="photos">
+        <li>
+          <img src="/assets/photos/paris1.jpg">
+          <span>Arc de Triomphe</span>
+        </li>
+        <li>
+          <img src="/assets/photos/paris2.jpg">
+          <span>The Eiffel Tower</span>
+        </li>
+        <li>
+          <img src="/assets/photos/paris3.jpg">
+          <span>Notre Dame de Paris</span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
 
 
+target the see-photos class on click
+then show the photos using closest to search up, find to search for the class to display
 
-
-
-
-
-
-
-
+$(document).ready(function() {
+  $('.see-photos').on('click', function() {
+    $(this).closest('.tour').find('.photos').slideToggle();
+  });
+});
 
 
 
